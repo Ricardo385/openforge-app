@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div *ngIf="!usersList">
+  <div *ngIf="(usersList | async)?.length == 0">
     <ion-list>
       <ion-item>
         <ion-thumbnail slot="start">
@@ -137,7 +137,7 @@
       </ion-item>
     </ion-list>
   </div>
-  <div *ngIf="usersList">
+  <div *ngIf="(usersList | async)?.length > 0">
     <ion-list>
       <ion-item
         *ngFor="let item of usersList | async"

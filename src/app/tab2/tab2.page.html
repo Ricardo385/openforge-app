@@ -11,7 +11,10 @@
     [(ngModel)]="searchValue"
     (ionBlur)="searchTerm($event)"
   ></ion-searchbar>
-  <div *ngIf="userSelected">
+  <h3 class="ion-text-center" *ngIf="(userSelected | async)?.length == 0">
+    No records found yet.
+  </h3>
+  <div *ngIf="(userSelected | async)?.length > 0">
     <ion-grid class="user" *ngFor="let item of userSelected | async">
       <ion-row>
         <ion-col size="12">
