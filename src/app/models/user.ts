@@ -1,10 +1,11 @@
 export interface User {
-  name: string,
-  login: string,
-  id: string,
-  bio: string,
   avatar_url: string,
+  bio: string,
+  blog: string,
   company: string,
+  name: string,
   location: string,
-  website: string
+  login: string,
+  public_repos: number,
+  id: string
 }

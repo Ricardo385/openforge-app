@@ -2,8 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { User } from '../models/user';
-import { ApiService } from '../services/api.service';
+import { Users } from '../models/users';
 import { loadUsers } from './store/user.actions';
 import { getUsers } from './store/user.selector';
 
@@ -14,8 +13,8 @@ import { getUsers } from './store/user.selector';
 })
 export class Tab1Page {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-  usersList: Observable<User[]>;
-  constructor(private store: Store, private apiService: ApiService) {}
+  usersList: Observable<Users[]>;
+  constructor(private store: Store) {}
 
   ngOnInit() {
     this.usersList = this.store.select(getUsers);

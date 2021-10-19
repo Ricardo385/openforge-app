@@ -1,0 +1,11 @@
+.user {
+  &-avatar {
+    width: 30%;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: auto;
+  }
+  &-login {
+    font-size: 12px;
+  }
+}

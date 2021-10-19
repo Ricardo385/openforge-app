@@ -8,11 +8,16 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+// PLUGINS
+
 // IMPORTING NGRX
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { USER_STATE_NAME } from './tab1/store/user.selector';
-import { userReducer } from './tab1/store/user.reducer';
+import {
+  SINGLE_USER_STATE_NAME,
+  USER_STATE_NAME,
+} from './tab1/store/user.selector';
+import { singleUserReducer, userReducer } from './tab1/store/user.reducer';
 import { UserEffects } from './tab1/store/user.effects';
 
 @NgModule({
@@ -25,6 +30,7 @@ import { UserEffects } from './tab1/store/user.effects';
     HttpClientModule,
     StoreModule.forRoot({}, {}),
     StoreModule.forFeature(USER_STATE_NAME, userReducer),
+    StoreModule.forFeature(SINGLE_USER_STATE_NAME, singleUserReducer),
     EffectsModule.forRoot(),
     EffectsModule.forFeature([UserEffects]),
   ],

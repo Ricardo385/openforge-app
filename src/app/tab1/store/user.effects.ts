@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { ApiService } from 'src/app/services/api.service';
-import { loadUsers, usersLoaded } from './user.actions';
+import {
+  loadUsers,
+  singleUserLoad,
+  singleUserLoaded,
+  usersLoaded,
+} from './user.actions';
 
 @Injectable()
 export class UserEffects {
@@ -20,4 +25,18 @@ export class UserEffects {
       })
     );
   });
+
+  loadSingleUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(singleUserLoad),
+      switchMap((action) => {
+        return this.apiService.getSingleUser(action.username).pipe(
+          map((user: any) => {
+            console.log(user);
+            return singleUserLoaded({ user });
+          })
+        );
+      })
+    )
+  );
 }

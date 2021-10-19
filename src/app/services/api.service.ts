@@ -1,8 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
+import { Users } from '../models/users';
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +13,12 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getAllUsers(since): Observable<User[]> {
+  getAllUsers(since): Observable<Users[]> {
     return this.http
-      .get<User[]>(this.api_url + `users?since=${since}&per_page=15`)
+      .get<Users[]>(this.api_url + `users?since=${since}&per_page=15`)
       .pipe(
         map((res) => {
-          const users: User[] = [];
+          const users: Users[] = [];
           for (let key in res) {
             users.push({ ...res[key], id: key });
           }
