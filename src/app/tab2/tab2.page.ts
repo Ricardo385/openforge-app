@@ -5,6 +5,7 @@ import { reset, singleUserLoad } from '../tab1/store/user.actions';
 import { getSingleUser } from '../tab1/store/user.selector';
 import { User } from '../models/user';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -13,12 +14,21 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 })
 export class Tab2Page {
   userSelected: Observable<User[]>;
+  searchValue: string;
 
-  constructor(private store: Store, private iab: InAppBrowser) {}
+  constructor(
+    private store: Store,
+    private iab: InAppBrowser,
+    private router: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.userSelected = this.store.select(getSingleUser);
-    this.store.dispatch(singleUserLoad({ username: 'ricardo385' }));
+    this.router.queryParams.subscribe((params) => {
+      this.searchValue = params['username'];
+      this.store.dispatch(reset());
+      this.store.dispatch(singleUserLoad({ username: this.searchValue }));
+    });
   }
 
   searchTerm(ev) {

@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -14,7 +15,7 @@ import { getUsers } from './store/user.selector';
 export class Tab1Page {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   usersList: Observable<Users[]>;
-  constructor(private store: Store) {}
+  constructor(private store: Store, private route: Router) {}
 
   ngOnInit() {
     this.usersList = this.store.select(getUsers);
@@ -26,5 +27,14 @@ export class Tab1Page {
       console.log('Done');
       event.target.complete();
     }, 500);
+  }
+
+  goToUser(username) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          username: username,
+      }
+  };
+    this.route.navigate(['/tabs/tab2'], navigationExtras);
   }
 }
