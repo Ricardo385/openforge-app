@@ -16,8 +16,8 @@ export class UserEffects {
   loadUsers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadUsers),
-      mergeMap(() => {
-        return this.apiService.getAllUsers(0).pipe(
+      mergeMap((action) => {
+        return this.apiService.getAllUsers(action.since).pipe(
           map((users) => {
             return usersLoaded({ users });
           })
@@ -32,7 +32,6 @@ export class UserEffects {
       switchMap((action) => {
         return this.apiService.getSingleUser(action.username).pipe(
           map((user: any) => {
-            console.log(user);
             return singleUserLoaded({ user });
           })
         );

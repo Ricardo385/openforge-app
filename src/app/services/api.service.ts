@@ -18,12 +18,7 @@ export class ApiService {
       .get<Users[]>(this.api_url + `users?since=${since}&per_page=15`)
       .pipe(
         map((res) => {
-          const users: Users[] = [];
-          for (let key in res) {
-            users.push({ ...res[key], id: key });
-          }
-          console.log(users);
-          return users;
+          return res;
         })
       );
   }

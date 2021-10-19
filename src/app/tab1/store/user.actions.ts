@@ -10,7 +10,10 @@ export enum ActionTypes {
   EMPTY_SINGLE_USER_REQUEST_SUCCESS = '[Single User Empty] User model empty successfully',
 }
 
-export const loadUsers = createAction(ActionTypes.LOAD_USERS_REQUEST);
+export const loadUsers = createAction(
+  ActionTypes.LOAD_USERS_REQUEST,
+  props<{ since: number }>()
+);
 
 export const usersLoaded = createAction(
   ActionTypes.LOAD_USERS_REQUEST_SUCCESS,
@@ -28,5 +31,5 @@ export const singleUserLoaded = createAction(
 );
 
 export const reset = createAction(
-  ActionTypes.EMPTY_SINGLE_USER_REQUEST_SUCCESS,
+  ActionTypes.EMPTY_SINGLE_USER_REQUEST_SUCCESS
 );

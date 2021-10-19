@@ -19,11 +19,16 @@ export class Tab1Page {
 
   ngOnInit() {
     this.usersList = this.store.select(getUsers);
-    this.store.dispatch(loadUsers());
+    this.store.dispatch(loadUsers({since: 0}));
   }
 
   loadData(event) {
+    let data: number;
+    this.usersList.subscribe((res) => {
+      data = parseInt(res[res.length-1].id + 1);
+    })
     setTimeout(() => {
+      this.store.dispatch(loadUsers({since: data}));
       console.log('Done');
       event.target.complete();
     }, 500);
@@ -32,9 +37,9 @@ export class Tab1Page {
   goToUser(username) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-          username: username,
+        username: username,
       }
-  };
+    };
     this.route.navigate(['/tabs/tab2'], navigationExtras);
   }
 }

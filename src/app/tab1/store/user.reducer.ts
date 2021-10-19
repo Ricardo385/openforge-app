@@ -10,7 +10,7 @@ import {
 export const userReducer = createReducer(
   initialState,
   on(usersLoaded, (state, action) => {
-    return userAdapter.setAll(action.users, state);
+    return userAdapter.addMany([...action.users], state);
   })
 );
 
