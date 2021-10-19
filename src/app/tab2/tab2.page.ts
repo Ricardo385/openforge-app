@@ -30,6 +30,5 @@ export class Tab2Page {
 
   openWebsite(url) {
     this.iab.create(url);
-    console.log('hello');
   }
 }
