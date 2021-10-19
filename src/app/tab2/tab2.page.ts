@@ -26,8 +26,10 @@ export class Tab2Page {
     this.userSelected = this.store.select(getSingleUser);
     this.router.queryParams.subscribe((params) => {
       this.searchValue = params['username'];
-      this.store.dispatch(reset());
-      this.store.dispatch(singleUserLoad({ username: this.searchValue }));
+      if (this.searchValue) {
+        this.store.dispatch(reset());
+        this.store.dispatch(singleUserLoad({ username: this.searchValue }));
+      }
     });
   }
 
