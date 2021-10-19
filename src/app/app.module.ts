@@ -8,8 +8,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// PLUGINS
-
 // IMPORTING NGRX
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -19,6 +17,7 @@ import {
 } from './tab1/store/user.selector';
 import { singleUserReducer, userReducer } from './tab1/store/user.reducer';
 import { UserEffects } from './tab1/store/user.effects';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +33,7 @@ import { UserEffects } from './tab1/store/user.effects';
     EffectsModule.forRoot(),
     EffectsModule.forFeature([UserEffects]),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, InAppBrowser],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

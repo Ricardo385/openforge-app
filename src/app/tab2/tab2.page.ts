@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { reset, singleUserLoad } from '../tab1/store/user.actions';
 import { getSingleUser } from '../tab1/store/user.selector';
 import { User } from '../models/user';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-tab2',
@@ -13,7 +14,7 @@ import { User } from '../models/user';
 export class Tab2Page {
   userSelected: Observable<User[]>;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private iab: InAppBrowser) {}
 
   ngOnInit() {
     this.userSelected = this.store.select(getSingleUser);
@@ -28,6 +29,7 @@ export class Tab2Page {
   }
 
   openWebsite(url) {
-    console.log('hello')
+    this.iab.create(url);
+    console.log('hello');
   }
 }
